@@ -1,0 +1,36 @@
+{
+  "name": "agentdb-demo",
+  "version": "1.0.0",
+  "description": "AgentDB Demo - Lightning-fast vector database and memory system for AI agents",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "demo:basic": "node demos/basic-demo.js",
+    "demo:advanced": "node demos/advanced-demo.js",
+    "demo:reasoning": "node demos/reasoning-demo.js",
+    "demo:all": "npm run demo:basic && npm run demo:advanced && npm run demo:reasoning",
+    "test": "node --test",
+    "start": "node src/index.js"
+  },
+  "keywords": [
+    "vector-database",
+    "ai",
+    "agents",
+    "memory",
+    "hnsw",
+    "mcp",
+    "reasoning"
+  ],
+  "author": "rUv",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^0.5.0",
+    "hnswlib-node": "^3.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
