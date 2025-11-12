@@ -3,8 +3,10 @@
  * Features HNSW indexing, ReasoningBank integration, and MCP support
  */
 
-import { HierarchicalNSW } from 'hnswlib-node';
+import hnswlib from 'hnswlib-node';
 import { EventEmitter } from 'events';
+
+const { HierarchicalNSW } = hnswlib;
 
 export class AgentDB extends EventEmitter {
   constructor(options = {}) {
@@ -45,7 +47,8 @@ export class AgentDB extends EventEmitter {
       throw new Error(`Vector dimension ${vectorArray.length} does not match index dimension ${this.dimension}`);
     }
 
-    this.index.addPoint(vectorArray, id);
+    // Convert to regular array for hnswlib-node
+    this.index.addPoint(Array.from(vectorArray), id);
     this.memoryStore.set(id, {
       vector: vectorArray,
       metadata,
@@ -70,7 +73,8 @@ export class AgentDB extends EventEmitter {
       throw new Error(`Query dimension ${queryArray.length} does not match index dimension ${this.dimension}`);
     }
 
-    const result = this.index.searchKnn(queryArray, k);
+    // Convert to regular array for hnswlib-node
+    const result = this.index.searchKnn(Array.from(queryArray), k);
 
     return result.neighbors.map((id, idx) => ({
       id,
